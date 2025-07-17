@@ -36,8 +36,8 @@ export async function createEditCabin(newCabin, id) {
     query = query
       .update({ ...newCabin, image: imagePath })
       .eq("id", id)
-      .select();
-  // .single(); // optional
+      .select()
+      .single(); // optional
 
   const { data, error } = await query.select();
 
