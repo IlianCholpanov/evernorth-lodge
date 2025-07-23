@@ -1,5 +1,5 @@
 import { cloneElement, createContext, useContext, useState } from "react";
-import { useOutideClick } from "../hooks/useOutsideClick";
+import { useOutsideClick } from "../hooks/useOutsideClick";
 
 import { createPortal } from "react-dom";
 import { HiXMark } from "react-icons/hi2";
@@ -77,7 +77,7 @@ function Open({ children, opens: opensWindowName }) {
 
 function Window({ children, name }) {
   const { openName, close } = useContext(ModalContext);
-  const ref = useOutideClick(close);
+  const ref = useOutsideClick(close);
 
   if (name !== openName) return null;
 
