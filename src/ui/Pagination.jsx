@@ -1,7 +1,7 @@
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
-import { INITIAL_PAGE_SIZE, PAGE_SIZE } from "../utils/constants";
+import { PAGE_SIZE } from "../utils/constants";
 
 const StyledPagination = styled.div`
   width: 100%;
@@ -62,39 +62,31 @@ const PaginationButton = styled.button`
 function Pagination({ count }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = !searchParams.get("page")
-    ? INITIAL_PAGE_SIZE
+    ? 1
     : Number(searchParams.get("page"));
 
   const pageCount = Math.ceil(count / PAGE_SIZE);
 
   function handleNextPage() {
-    const next =
-      currentPage === pageCount ? currentPage : currentPage + INITIAL_PAGE_SIZE;
+    const next = currentPage === pageCount ? currentPage : currentPage + 1;
 
     searchParams.set("page", next);
     setSearchParams(searchParams);
   }
 
   function handlePreviousPage() {
-    const prev =
-      currentPage === INITIAL_PAGE_SIZE
-        ? currentPage
-        : currentPage - INITIAL_PAGE_SIZE;
+    const prev = currentPage === 1 ? currentPage : currentPage - 1;
 
     searchParams.set("page", prev);
     setSearchParams(searchParams);
   }
 
-  if (pageCount <= INITIAL_PAGE_SIZE) return null;
+  if (pageCount <= 1) return null;
 
   return (
     <StyledPagination>
       <P>
-        Showing{" "}
-        <span>
-          {(currentPage - INITIAL_PAGE_SIZE) * PAGE_SIZE + INITIAL_PAGE_SIZE}
-        </span>{" "}
-        to
+        Showing <span>{(currentPage - 1) * PAGE_SIZE + 1}</span> to
         <span>
           {" "}
           {currentPage === pageCount ? count : currentPage * PAGE_SIZE}
@@ -104,7 +96,7 @@ function Pagination({ count }) {
       <Buttons>
         <PaginationButton
           onClick={handlePreviousPage}
-          disabled={currentPage === INITIAL_PAGE_SIZE}
+          disabled={currentPage === 1}
         >
           <HiChevronLeft />
           <span>Previous</span>

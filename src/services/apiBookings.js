@@ -1,4 +1,4 @@
-import { INITIAL_PAGE_SIZE, PAGE_SIZE } from "../utils/constants";
+import { PAGE_SIZE } from "../utils/constants";
 import { getToday } from "../utils/helpers";
 import supabase from "./supabase";
 
@@ -21,8 +21,8 @@ export async function getBookings({ filter, sortBy, page }) {
     });
 
   if (page) {
-    const from = (page - INITIAL_PAGE_SIZE) * PAGE_SIZE;
-    const to = from + PAGE_SIZE - INITIAL_PAGE_SIZE;
+    const from = (page - 1) * PAGE_SIZE;
+    const to = from + PAGE_SIZE - 1;
 
     query = query.range(from, to);
   }
