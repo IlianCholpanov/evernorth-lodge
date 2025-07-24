@@ -39,19 +39,4 @@ function Checkbox({ checked, onChange, disabled = false, id, children }) {
   );
 }
 
-// function Checkbox({ checked, onChange, disabled = false, id, children }) {
-//   return (
-//     <StyledCheckbox>
-//       <input
-//         type="checkbox"
-//         {...(id ? { id } : {})} // add id only if valid
-//         checked={checked}
-//         onChange={onChange}
-//         disabled={disabled}
-//       />
-//       <label {...(id ? { htmlFor: id } : {})}>{children}</label>
-//     </StyledCheckbox>
-//   );
-// }
-
 export default Checkbox;
