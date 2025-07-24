@@ -1,17 +1,25 @@
 import { useState } from "react";
-import Button from "../../ui/Button";
-import Form from "../../ui/Form";
-import Input from "../../ui/Input";
+import { useLogin } from "./useLogin";
+
 import FormRowVertical from "../../ui/FormRowVertical";
+import Button from "../../ui/Button";
+import Input from "../../ui/Input";
+import Form from "../../ui/Form";
+import SpinnerMini from "../../ui/SpinnerMini";
 
 function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("user@example.com");
+  const [password, setPassword] = useState("010101");
+  const { login, isPending } = useLogin();
 
-  function handleSubmit() {}
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (!email || !password) return;
+    login({ email, password });
+  }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form type="login" onSubmit={handleSubmit}>
       <FormRowVertical label="Email address">
         <Input
           type="email"
@@ -20,8 +28,10 @@ function LoginForm() {
           autoComplete="username"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          disabled={isPending}
         />
       </FormRowVertical>
+
       <FormRowVertical label="Password">
         <Input
           type="password"
@@ -29,10 +39,14 @@ function LoginForm() {
           autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          disabled={isPending}
         />
       </FormRowVertical>
+
       <FormRowVertical>
-        <Button size="large">Login</Button>
+        <Button size="large" disabled={isPending}>
+          {!isPending ? "Log in" : <SpinnerMini />}
+        </Button>
       </FormRowVertical>
     </Form>
   );
