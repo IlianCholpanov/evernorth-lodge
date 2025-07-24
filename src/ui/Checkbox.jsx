@@ -18,7 +18,6 @@ const StyledCheckbox = styled.div`
 
   & label {
     flex: 1;
-
     display: flex;
     align-items: center;
     gap: 0.8rem;
@@ -35,9 +34,24 @@ function Checkbox({ checked, onChange, disabled = false, id, children }) {
         onChange={onChange}
         disabled={disabled}
       />
-      <label htmlFor={!disabled ? id : ""}>{children}</label>
+      <label {...(id ? { htmlFor: id } : {})}>{children}</label>
     </StyledCheckbox>
   );
 }
+
+// function Checkbox({ checked, onChange, disabled = false, id, children }) {
+//   return (
+//     <StyledCheckbox>
+//       <input
+//         type="checkbox"
+//         {...(id ? { id } : {})} // add id only if valid
+//         checked={checked}
+//         onChange={onChange}
+//         disabled={disabled}
+//       />
+//       <label {...(id ? { htmlFor: id } : {})}>{children}</label>
+//     </StyledCheckbox>
+//   );
+// }
 
 export default Checkbox;
