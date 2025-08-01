@@ -65,6 +65,7 @@ yarn dev
 ```
 
 The app will be available at `http://localhost:5173` by default.
+You can login with Credentials: user@example.com & 010101
 
 ## Available Scripts
 
